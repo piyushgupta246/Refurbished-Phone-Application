@@ -1,4 +1,4 @@
-# 📱 Refurbished Mobile Store (Python + Flask)
+# 📱 Refurbished Mobile Store (Python + Django)
 
 ![Refurbished Phones Banner](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/1.Home3.png)
 
