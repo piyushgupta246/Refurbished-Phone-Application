@@ -42,6 +42,12 @@ The platform allows users to browse, filter, and purchase refurbished phones wit
 ---
 
 ## 📦 Installation
+## 🔧 Clone & Setup
 
-### 1. Clone the Repository:
+Follow these steps to clone and run this project locally:
+
+### 1. Clone the Repository
 ```bash
+git clone https://github.com/piyushgupta246/Refurbished-Phone-Application.git
+cd Refurbished-Phone-Application
+
