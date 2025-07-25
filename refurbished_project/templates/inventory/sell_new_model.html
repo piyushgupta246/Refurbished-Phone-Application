@@ -1,0 +1,51 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Sell a New Model{% endblock %}
+
+{% block content %}
+<h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Sell a New Model</h1>
+
+<div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="space-y-6">
+            <div>
+                <label for="id_name" class="block text-sm font-medium text-gray-700">Your Name</label>
+                <input type="text" name="name" id="id_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+            </div>
+            <div>
+                <label for="id_email" class="block text-sm font-medium text-gray-700">Your Email</label>
+                <input type="email" name="email" id="id_email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+            </div>
+            <div>
+                <label for="id_phone_name" class="block text-sm font-medium text-gray-700">Phone Model</label>
+                <input type="text" name="phone_name" id="id_phone_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+            </div>
+            <div>
+                <label for="id_brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                <input type="text" name="brand" id="id_brand" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+            </div>
+            <div>
+                <label for="id_condition" class="block text-sm font-medium text-gray-700">Condition</label>
+                <select name="condition" id="id_condition" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
+                    <option value="New">New</option>
+                    <option value="Good">Good</option>
+                    <option value="Usable">Usable</option>
+                    <option value="Scrap">Scrap</option>
+                </select>
+            </div>
+            <div>
+                <label for="id_comments" class="block text-sm font-medium text-gray-700">Additional Comments</label>
+                <textarea name="comments" id="id_comments" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-end">
+            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Submit Request
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

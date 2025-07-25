@@ -1,0 +1,33 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}User Queries{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-6">User Queries</h1>
+    
+    {% if queries %}
+        <div class="space-y-6">
+            {% for query in queries %}
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ query.name }}</h3>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">{{ query.created_at|date:"F d, Y, P" }}</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-3">
+                        <a href="mailto:{{ query.email }}" class="text-blue-600 hover:underline">{{ query.email }}</a>
+                    </p>
+                    <p class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ query.message }}</p>
+                    {% if user.is_staff %}
+                        <div class="text-right mt-4">
+                            <a href="{% url 'query_delete' query.pk %}" class="text-red-600 hover:text-red-800">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-gray-600 dark:text-gray-400 text-xl mt-10">No queries have been submitted yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

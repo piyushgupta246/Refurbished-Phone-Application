@@ -1,0 +1,47 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Features{% endblock %}
+
+{% block content %}
+<div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Why Choose Us?</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- About the Company -->
+        <div class="bg-gray-50 p-6 rounded-lg text-center">
+            <img src="/media/phone_images/company-about.png" alt="About Our Company" class="w-[200px] h-[200px] object-contain rounded-full bg-transparent mb-4 mx-auto">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">About Our Company</h2>
+            <p class="text-gray-700">
+                We are a leading provider of high-quality refurbished phones. Our mission is to provide affordable, reliable, and eco-friendly mobile devices to our customers without compromising on quality. We believe in a sustainable future where technology is accessible to everyone.
+            </p>
+        </div>
+
+        <!-- Our Certification Process -->
+        <div class="bg-gray-50 p-6 rounded-lg text-center">
+            <img src="/media/phone_images/certified-image.jpeg" alt="Our Certification Process" class="w-[200px] h-[200px] object-contain rounded-full bg-transparent mb-4 mx-auto">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Certification Process</h2>
+            <p class="text-gray-700">
+                All our phones go through a rigorous 30+ point testing process, including hardware, battery, and performance checks, to ensure they meet our high standards. Each device is professionally restored and certified by our team of expert technicians before reaching your hands.
+            </p>
+        </div>
+
+        <!-- Warranty and Support -->
+        <div class="bg-gray-50 p-6 rounded-lg text-center">
+            <img src="/media/phone_images/warrenty and support.png" alt="Warranty and Support" class="w-[200px] h-[200px] object-contain rounded-full bg-transparent mb-4 mx-auto">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Warranty and Support</h2>
+            <p class="text-gray-700">
+                Every purchase comes with a comprehensive warranty, an easy return policy, and secure payment options for a hassle-free experience. Our dedicated customer support team is always here to help you with any questions or concerns.
+            </p>
+        </div>
+
+        <!-- Environmental Impact -->
+        <div class="bg-gray-50 p-6 rounded-lg text-center">
+            <img src="/media/phone_images/environment.png" alt="Environmental Impact" class="w-[200px] h-[200px] object-contain rounded-full bg-transparent mb-4 mx-auto">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Environmental Impact</h2>
+            <p class="text-gray-700">
+                By choosing refurbished phones, you not only save money but also contribute to reducing electronic waste and protecting the environment. Your trust drives us to provide top-notch customer support and unmatched value.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

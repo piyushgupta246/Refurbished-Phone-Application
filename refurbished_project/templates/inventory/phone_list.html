@@ -1,0 +1,85 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}All Phones{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Our Phone Inventory</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Filter Section -->
+        <div class="lg:col-span-1">
+            <form method="get" class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Filters</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="memory" class="block text-sm font-medium text-gray-700">Memory (GB)</label>
+                        <input type="number" name="memory" id="memory" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="min_price" class="block text-sm font-medium text-gray-700">Min Price</label>
+                        <input type="number" name="min_price" id="min_price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="max_price" class="block text-sm font-medium text-gray-700">Max Price</label>
+                        <input type="number" name="max_price" id="max_price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="condition" class="block text-sm font-medium text-gray-700">Condition</label>
+                        <select name="condition" id="condition" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            <option value="">All</option>
+                            <option value="New">New</option>
+                            <option value="Good">Good</option>
+                            <option value="Usable">Usable</option>
+                            <option value="Scrap">Scrap</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="color" class="block text-sm font-medium text-gray-700">Color</label>
+                        <input type="text" name="color" id="color" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Phone Listings -->
+        <div class="lg:col-span-3">
+            {% if phones %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for phone in phones %}
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
+                            {% if phone.image %}
+                                <img src="{{ phone.image.url }}" alt="{{ phone.name }}" class="h-48 w-full object-cover">
+                            {% endif %}
+                            <div class="p-6 flex-grow">
+                                <h2 class="text-xl font-bold text-gray-800 mb-2">{{ phone.name }}</h2>
+                                <p class="text-lg font-semibold text-blue-600 mb-2">${{ phone.base_price }}</p>
+                                <p class="text-gray-600 mb-1"><strong class="text-gray-700">Condition:</strong> {{ phone.condition }}</p>
+                                <p class="text-gray-600 mb-1"><strong class="text-gray-700">Memory:</strong> {{ phone.memory }}GB</p>
+                                <p class="text-gray-600 mb-4"><strong class="text-gray-700">Stock:</strong>
+                                    <span class="font-semibold {% if phone.stock == 0 %}text-red-600{% elif phone.stock < 5 %}text-orange-500{% else %}text-green-600{% endif %}">
+                                        {{ phone.stock }}
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="p-6 bg-gray-50">
+                                <a href="{% url 'phone_detail' phone.pk %}"
+                                   class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center text-gray-600 text-xl mt-10">No phones match your criteria.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

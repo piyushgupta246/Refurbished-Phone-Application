@@ -1,0 +1,280 @@
+<!-- templates/inventory/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Refurbished Phone Manager{% endblock %}</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    // your theme extensions here
+                },
+            },
+            variants: {
+                extend: {
+                    // your variants extensions here
+                },
+            },
+            plugins: [],
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .message-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .message-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        .message-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-color: #bee5eb;
+        }
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            cursor: move;
+        }
+        #chatbot-window {
+            width: 350px;
+            height: 450px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: none;
+            flex-direction: column;
+            transition: all 0.3s ease-in-out;
+            transform: scale(0.5);
+            opacity: 0;
+        }
+        #chatbot-window.open {
+            transform: scale(1);
+            opacity: 1;
+        }
+        #chatbot-toggle {
+            transition: transform 0.3s ease-in-out;
+        }
+        #chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 min-h-screen flex flex-col">
+    <nav class="bg-white dark:bg-gray-800 shadow-md">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="{% url 'home' %}" class="text-2xl font-bold text-gray-800 dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">
+                        Refurbished Phones
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex lg:hidden">
+                    <button type="button" class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400" aria-label="toggle menu">
+                        <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
+                            <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="hidden lg:flex lg:items-center">
+                    <a href="{% url 'home' %}" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+                    <a href="{% url 'features' %}" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Features</a>
+                    <a href="{% url 'home' %}#brands" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Brands</a>
+                    <a href="{% url 'phone_list' %}" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Buy</a>
+                    <a href="{% url 'sell_new_model' %}" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Sell</a>
+                    {% if user.is_authenticated and user.is_staff %}
+                        <a href="{% url 'brand_add' %}" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Add Brand</a>
+                        <a href="{% url 'query_list' %}" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Queries</a>
+                        <form action="{% url 'logout' %}" method="post" class="inline">
+                            {% csrf_token %}
+                            <button type="submit" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 bg-transparent border-none">Logout</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="py-2 px-4 text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">Admin Login</a>
+                    {% endif %}
+                    <button id="dark-mode-toggle" class="ml-4 text-gray-700 dark:text-gray-200 focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container flex-grow py-8">
+        {% if messages %}
+            <div class="mb-6">
+                {% for message in messages %}
+                    <div class="p-4 mb-3 rounded-lg shadow-sm text-sm {% if message.tags == 'success' %}message-success{% elif message.tags == 'error' %}message-error{% elif message.tags == 'info' %}message-info{% else %}bg-gray-200 text-gray-800{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <p>Email: contact@refurbishedphones.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-gray-400">Facebook</a>
+                        <a href="#" class="text-white hover:text-gray-400">Twitter</a>
+                        <a href="#" class="text-white hover:text-gray-400">Instagram</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Location</h3>
+                    <p>123 Main Street</p>
+                    <p>Anytown, USA 12345</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const html = document.documentElement;
+
+        // On page load, check for saved theme preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            html.classList.add('dark');
+        }
+
+        toggleButton.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            // Save the theme preference to localStorage
+            localStorage.setItem('darkMode', html.classList.contains('dark'));
+        });
+    </script>
+
+    <div id="chatbot-container">
+        <button id="chatbot-toggle" class="bg-blue-600 text-white p-4 rounded-full shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+        </button>
+        <div id="chatbot-window" class="bg-white dark:bg-gray-800">
+            <div id="chatbot-header" class="p-4 bg-blue-600 text-white rounded-t-lg cursor-move">
+                <h3 class="text-lg font-bold">Chat with us</h3>
+            </div>
+            <div class="p-4 flex-grow">
+                <p class="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                    Have a question or a request for a phone we don't have? Let us know!
+                </p>
+                <form id="query-form">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                        <input type="text" name="name" id="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <input type="email" name="email" id="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                        <textarea name="message" id="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatbotHeader = document.getElementById('chatbot-header');
+        const queryForm = document.getElementById('query-form');
+
+        chatbotToggle.addEventListener('click', () => {
+            const isOpen = chatbotWindow.classList.contains('open');
+            if (!isOpen) {
+                chatbotWindow.style.display = 'flex';
+                setTimeout(() => chatbotWindow.classList.add('open'), 10);
+            } else {
+                chatbotWindow.classList.remove('open');
+                setTimeout(() => chatbotWindow.style.display = 'none', 300);
+            }
+        });
+
+        // Drag and drop functionality
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        chatbotHeader.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - chatbotContainer.offsetLeft;
+            offsetY = e.clientY - chatbotContainer.offsetTop;
+            chatbotContainer.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            chatbotContainer.style.left = `${e.clientX - offsetX}px`;
+            chatbotContainer.style.top = `${e.clientY - offsetY}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            chatbotContainer.style.cursor = 'move';
+        });
+
+        queryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(queryForm);
+            fetch("{% url 'submit_query' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Your query has been submitted successfully!');
+                    queryForm.reset();
+                    chatbotWindow.classList.remove('open');
+                    setTimeout(() => chatbotWindow.style.display = 'none', 300);
+                } else {
+                    alert('There was an error submitting your query.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

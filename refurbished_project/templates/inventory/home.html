@@ -1,0 +1,109 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white text-center py-20 mb-12 rounded-lg shadow-2xl">
+    <h1 class="text-5xl font-extrabold mb-4">Quality Refurbished Phones</h1>
+    <p class="text-xl mb-8">Your one-stop shop for certified pre-owned devices.</p>
+    <a href="{% url 'phone_list' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full transition duration-300">Shop Now</a>
+</div>
+
+<!-- Brands Section -->
+<div class="py-8 bg-gray-50 rounded-lg shadow-lg mb-12" id="brands">
+    <div class="container mx-auto px-6">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Our Brands</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for brand in brands %}
+                <a href="{% url 'brand_detail' brand.pk %}" class="bg-white rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-300 ease-in-out p-4 text-center block transform hover:-translate-y-1">
+                    <img src="/media/phone_images/phone-logo.png" alt="{{ brand.name }} Phone" class="h-24 w-auto mx-auto mb-2">
+                    <h3 class="text-xl font-bold text-gray-800">{{ brand.name }}</h3>
+                    <p class="text-sm text-gray-500 mt-1">{{ brand.phone_count }} Models Available</p>
+                </a>
+            {% empty %}
+                <p class="text-center text-gray-600 text-xl mt-10 col-span-full">No brands have been added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Why Choose Us Section -->
+<div class="py-16" id="why-choose-us">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Why Choose RePhone?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div class="flex flex-col items-center">
+                <div class="bg-blue-100 rounded-full p-5 mb-4">
+                    <svg class="h-12 w-12 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Certified Quality</h3>
+                <p class="text-gray-600">Every device undergoes a rigorous 30+ point inspection to ensure it meets our highest standards.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="bg-green-100 rounded-full p-5 mb-4">
+                    <svg class="h-12 w-12 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">1-Year Warranty</h3>
+                <p class="text-gray-600">Shop with confidence. All our phones come with a comprehensive 12-month warranty.</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="bg-yellow-100 rounded-full p-5 mb-4">
+                    <svg class="h-12 w-12 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Eco-Friendly Choice</h3>
+                <p class="text-gray-600">By choosing refurbished, you're helping to reduce e-waste and protect our planet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="py-12 bg-gray-50 rounded-lg shadow-lg mb-12">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">What Our Customers Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-gray-600 mb-4">"I was hesitant to buy a refurbished phone, but the quality is amazing! It looks and works like new. Highly recommend!"</p>
+                <p class="font-bold text-gray-800">- Sarah J.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-gray-600 mb-4">"Great prices and fast shipping. The 1-year warranty gave me peace of mind. I'll be back for my next phone."</p>
+                <p class="font-bold text-gray-800">- Mike D.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-gray-600 mb-4">"Excellent customer service. They answered all my questions and helped me choose the perfect phone for my needs."</p>
+                <p class="font-bold text-gray-800">- Emily R.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Company Details Section -->
+<div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+            <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Welcome to RePhone</h2>
+            <p class="text-gray-700 text-lg mb-4">
+                We are a leading provider of high-quality refurbished phones. Our mission is to provide affordable, reliable, and eco-friendly mobile devices to our customers without compromising on quality.
+            </p>
+            <p class="text-gray-700 text-lg mb-4">
+                All our phones go through a rigorous 30+ point testing process, including hardware, battery, and performance checks, to ensure they meet our high standards. Each device is professionally restored and certified before reaching your hands.
+            </p>
+            <p class="text-gray-700 text-lg mb-4">
+                By choosing refurbished phones, you not only save money but also contribute to reducing electronic waste and protecting the environment. Your trust drives us to provide top-notch customer support and unmatched value.
+            </p>
+        </div>
+        <div class="relative h-96">
+            <img src="media/phone_images/company-about.png" alt="Customer Support" class="w-full h-full object-cover rounded-lg shadow-md">
+            <div class="absolute inset-0 bg-blue-500 opacity-25 rounded-lg"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
