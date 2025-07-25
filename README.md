@@ -34,7 +34,10 @@ The platform allows users to browse, filter, and purchase refurbished phones wit
 ![Product Details](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/1.Home2.png)
 ![Product Details](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/2.Feature.png)
 ![Product Details](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/4.Buy.png)
-![Cart Page]([https://your-image-link.com/cart.png](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/6.ChatBot.png))
+![Cart Page](https://your-image-link.com/cart.png](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/6.ChatBot.png))
+
+![Cart Page](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/7.UserQuery.png)
+
 
 ---
 
@@ -42,5 +45,3 @@ The platform allows users to browse, filter, and purchase refurbished phones wit
 
 ### 1. Clone the Repository:
 ```bash
-git clone https://github.com/your-username/refurbished-mobile-store.git
-cd refurbished-mobile-store
