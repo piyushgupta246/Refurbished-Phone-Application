@@ -57,12 +57,12 @@ cd Refurbished-Phone-Application
 
 Refurbished-Phone-Application/
 │
-├── static/ # CSS, JS, images
-├── templates/ # HTML templates
-├── refurbished/ # Django app folder
-├── manage.py # Django entry point
-├── requirements.txt # Dependencies
-└── README.md
+├── static/ # CSS, JS, images <br>
+├── templates/ # HTML templates <br>
+├── refurbished/ # Django app folder <br>
+├── manage.py # Django entry point <br>
+├── requirements.txt # Dependencies <br>
+└── README.md <br>
 
 
 ### 3. 🤝 Contributing
