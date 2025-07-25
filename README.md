@@ -51,6 +51,7 @@ Follow these steps to clone and run this project locally:
 ```bash
 git clone https://github.com/piyushgupta246/Refurbished-Phone-Application.git
 cd Refurbished-Phone-Application
+```
 
 ### 2. Project Structure
 Refurbished-Phone-Application/
