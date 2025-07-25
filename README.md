@@ -2,12 +2,10 @@
 
 ![Refurbished Phones Banner](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/1.Home3.png)
 
-A fully-featured **Refurbished Phone Web App** built with **Python (Flask)**.  
+A fully-featured **Refurbished Phone Web App** built with **Python (Django)**.  
 The platform allows users to browse, filter, and purchase refurbished phones with a smooth, responsive UI.
 
 ---
-
-## 🚀 Features
 
 ## 🚀 Features
 
@@ -28,26 +26,24 @@ The platform allows users to browse, filter, and purchase refurbished phones wit
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Python (Flask/Django)
+- **Backend:** Python (Django)
 - **Frontend:** HTML, CSS (Bootstrap), JavaScript
-- **Database:** SQLite/MySQL
-- **Authentication:** Flask-Login / Django Auth
+- **Database:** SQLite (default) / MySQL
+- **Authentication:** Django Auth
 - **Deployment:** Render / Railway / Heroku
 
 ---
 
 ## 🖼️ Screenshots
 
-![Product Details](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/1.Home2.png)
-![Product Details](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/2.Feature.png)
-![Product Details](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/4.Buy.png)
-![Cart Page](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/7.UserQuery.png)
-
+![Home Page](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/1.Home2.png)
+![Features Page](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/2.Feature.png)
+![Buy Page](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/4.Buy.png)
+![User Query Page](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/7.UserQuery.png)
 
 ---
 
-## 📦 Installation
-## 🔧 Clone & Setup
+## 📦 Installation & Setup
 
 Follow these steps to clone and run this project locally:
 
@@ -55,4 +51,3 @@ Follow these steps to clone and run this project locally:
 ```bash
 git clone https://github.com/piyushgupta246/Refurbished-Phone-Application.git
 cd Refurbished-Phone-Application
-
