@@ -54,13 +54,14 @@ cd Refurbished-Phone-Application
 ```
 
 ### 2. Project Structure
+
 Refurbished-Phone-Application/
 │
-├── static/            # CSS, JS, images
-├── templates/         # HTML templates
-├── refurbished/       # Django app folder
-├── manage.py          # Django entry point
-├── requirements.txt   # Dependencies
+├── static/ # CSS, JS, images
+├── templates/ # HTML templates
+├── refurbished/ # Django app folder
+├── manage.py # Django entry point
+├── requirements.txt # Dependencies
 └── README.md
 
 
