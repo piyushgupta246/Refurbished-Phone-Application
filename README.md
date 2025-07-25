@@ -30,8 +30,8 @@ The platform allows users to browse, filter, and purchase refurbished phones wit
 
 ## 🖼️ Screenshots
 
-![Home Page](https://your-image-link.com/homepage.png)
-![Product Details](https://your-image-link.com/product.png)
+![Home Page](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/1.Home3.png)
+![Product Details](https://github.com/piyushgupta246/Refurbished-Phone-Application/blob/main/Frontend-Image/1.Home2.png)
 ![Cart Page](https://your-image-link.com/cart.png)
 
 ---
