@@ -61,3 +61,12 @@ Refurbished-Phone-Application/
 ├── manage.py          # Django entry point
 ├── requirements.txt   # Dependencies
 └── README.md
+
+
+### 3. 🤝 Contributing
+
+-We welcome contributions!
+-Fork this repository
+-Create a new branch
+-Make your changes
+-Submit a Pull Request
